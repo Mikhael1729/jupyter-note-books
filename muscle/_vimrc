@@ -1,0 +1,50 @@
+source $VIMRUNTIME/vimrc_example.vim
+
+" My configuraiton
+
+" Editor configuration
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+set ai
+set number
+set hlsearch
+set ruler
+highlight Comment ctermfg=green
+highlight LineNr ctermfg=grey
+highlight LineNr guifg=white
+
+"set backup
+"set backupdir=.\\.backup,.\\tmp
+"set directory=.,.\\.backup,\\tmp
+
+"set undodir=.\\.backup,.\\tmp
+set backup
+set backupdir=C:\\vim_tmp_files
+set directory=C:\\vim_tmp_files
+
+set undodir=C:\\vim_tmp_files
+
+" Wrapping
+noremap <silent> <Leader>w : call ToggleWrap()<CR>
+function ToggleWrap()
+  if &wrap
+    echo "Wrap OFF"
+    setlocal nowrap
+    set virtualedit=all
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+    silent! nunmap <buffer> <Up>
+    silent! nunmap <buffer> <Down>
+    silent! nunmap <buffer> <Home>
+    silent! nunmap <buffer> <End>
+  else
+    echo "Wrap ON"
+    setlocal wrap linebreak nolist
+    set virtualedit=
+    setlocal display+=lastline
+    noremap <buffer> <silent> <Up> gk
+    noremap <buffer> <silent> <Down> gj
